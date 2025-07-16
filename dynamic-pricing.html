@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dynamic Pricing Calculator</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Dynamic Pricing Calculator</h1>
+    <p>Estimate your session cost based on service type, time, and vulnerability status.</p>
+  </header>
+
+  <main>
+    <form id="pricingForm">
+      <label>
+        Service Type:
+        <select id="service">
+          <option value="teletherapy">Teletherapy</option>
+          <option value="in-person">In-Person</option>
+          <option value="group">Group Therapy</option>
+        </select>
+      </label>
+
+      <label>
+        Vulnerable Segment:
+        <select id="segment">
+          <option value="none">None</option>
+          <option value="pwd">PWD</option>
+          <option value="student">Student</option>
+          <option value="indigenous">Indigenous</option>
+        </select>
+      </label>
+
+      <button type="submit">Calculate Price</button>
+    </form>
+
+    <div id="priceResult"></div>
+  </main>
+
+  <script>
+    const pricing = {
+      teletherapy: 899,
+      "in-person": 1199,
+      group: 499
+    };
+
+    const discounts = {
+      none: 1.0,
+      pwd: 0.7,
+      student: 0.7,
+      indigenous: 0.6
+    };
+
+    document.getElementById("pricingForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const service = document.getElementById("service").value;
+      const segment = document.getElementById("segment").value;
+      let base = pricing[service];
+      let discount = discounts[segment];
+      let final = base * discount;
+      document.getElementById("priceResult").textContent = `Your estimated cost: ₱${final.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
