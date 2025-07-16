@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resilience Navigator | Cognitio+</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Resilience Navigator</h1>
+    <p>AI-Powered Self-Assessment Tool</p>
+  </header>
+
+  <main>
+    <p>This tool helps you understand your resilience level and provides personalized recommendations based on your input.</p>
+    <form id="resilienceForm">
+      <label>How often do you feel overwhelmed?
+        <select>
+          <option value="1">Rarely</option>
+          <option value="2">Sometimes</option>
+          <option value="3">Often</option>
+        </select>
+      </label>
+
+      <label>How do you handle stress?
+        <select>
+          <option value="1">I manage well</option>
+          <option value="2">I sometimes struggle</option>
+          <option value="3">I need help</option>
+        </select>
+      </label>
+
+      <button type="submit">Get Resilience Score</button>
+    </form>
+
+    <div id="result"></div>
+  </main>
+
+  <script>
+    document.getElementById("resilienceForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const score = Array.from(document.querySelectorAll("select")).reduce((sum, el) => sum + parseInt(el.value), 0);
+      const result = document.getElementById("result");
+
+      if (score <= 3) {
+        result.textContent = "🟢 You have strong resilience! Keep it up.";
+      } else if (score <= 5) {
+        result.textContent = "🟡 You're doing okay. Consider exploring more tools.";
+      } else {
+        result.textContent = "🔴 You may need extra support. Reach out to a support group.";
+      }
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Cognitio+. All rights reserved.</p>
+  </footer>
+</body>
+</html>
